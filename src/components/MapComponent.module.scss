@@ -1,0 +1,11 @@
+.MapWrapper {
+  position: fixed !important;
+  top: 50px;
+  width: 66%;
+  z-index: 9999;
+
+  .MapContainer {
+    height: calc(100vh - 50px);
+  }
+}
+
