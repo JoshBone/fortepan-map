@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 const MapComponent = ({photoData}) => {
     const [position, setPosition] = useState([47.4983, 19.0408])
 
-    console.log(photoData);
 
     const renderMarkers = () => {
         const {places} = photoData;
