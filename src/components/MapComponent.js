@@ -15,8 +15,7 @@ const MapComponent = ({photoData}) => {
                     return (
                         <Marker key={idx} position={[p['latitude'], p['longitude']]}>
                             <Popup>
-                                {photoData['description']}<br/><br/>
-                                Geokódolt cím: {p['full_address']}
+                                {p['full_address']}
                             </Popup>
                         </Marker>
                     )

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {Nunito_Sans} from "next/font/google";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row, Table} from "react-bootstrap";
 import style from "./index.module.scss";
 const nunitoSans = Nunito_Sans({ subsets: ["latin"] , weight: ['400', '800', '1000']});
 import Image from 'next/image';
@@ -33,7 +33,14 @@ export default function Home({data}) {
 
   const renderPhotos = () => {
       return data.map((photo, idx) => {
-          return <GalleryItem key={idx} photoData={photo} selectedPhoto={selectedPhoto} onSelect={handleSelect}/>
+          return (
+            <tr className={style.TableRow}>
+              <td style={{verticalAlign: "middle", textAlign: "center"}}><GalleryItem key={idx} photoData={photo} selectedPhoto={selectedPhoto} onSelect={handleSelect}/></td>
+              <td style={{verticalAlign: "middle"}}>{photo['description']}</td>
+              <td style={{verticalAlign: "middle", textAlign: "center"}}>{photo['places'].filter(place => place['latitude']).length}</td>
+            </tr>
+          )
+
       })
   }
 
@@ -62,12 +69,23 @@ export default function Home({data}) {
                   </Col>
               </Row>
               <Row style={{minHeight: '100wh'}}>
-                  <Col xs={4}>
-                      <div className={style.PhotoGrid}>
-                          {renderPhotos()}
+                  <Col xs={6}>
+                      <div style={{marginTop: '60px'}}>
+                        <Table striped bordered hover size="sm">
+                          <thead>
+                            <tr>
+                              <th style={{width: '30%'}}>Thumbnail</th>
+                              <th>Description</th>
+                              <th style={{width: '10%'}}>Points</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {renderPhotos()}
+                          </tbody>
+                        </Table>
                       </div>
                   </Col>
-                  <Col xs={8}>
+                  <Col xs={6}>
                       <div className={style.RightSide}>
                           <MapComponent photoData={selectedPhotoData} />
                       </div>
